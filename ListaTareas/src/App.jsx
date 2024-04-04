@@ -46,6 +46,17 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(updatedTasks)); 
   }
 
+  const updateTask = (id, updatedTask) => {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, task: updatedTask };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  }
+
   return (
     <>
       <h2>To Do List</h2>
@@ -65,6 +76,7 @@ function App() {
           key={task.id}
           id={task.id}
           task={task}
+          updateTask={updateTask}
           deletedTask={deletedTasks}
         />
       ))}
